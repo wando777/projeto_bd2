@@ -30,4 +30,9 @@ public class Venda {
 		this.idMoeda = idMoeda;
 	}
 
+	@Override
+	public String toString() {
+		return "Id: " + id + " Id Corretora: " + idCorretora + " Id Moeda: " + idMoeda;
+	}
+
 }

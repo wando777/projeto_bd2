@@ -4,7 +4,7 @@ public class Moeda {
 
 	private int id;
 	private String name;
-	private double supplyMax;
+	private Long supplyMax;
 	private double currentValue;
 
 	public int getId() {
@@ -23,12 +23,12 @@ public class Moeda {
 		this.name = name;
 	}
 
-	public double getSupplyMax() {
+	public long getSupplyMax() {
 		return supplyMax;
 	}
 
-	public void setSupplyMax(double supplyMax) {
-		this.supplyMax = supplyMax;
+	public void setSupplyMax(long i) {
+		this.supplyMax = i;
 	}
 
 	public double getCurrentValue() {
@@ -39,4 +39,9 @@ public class Moeda {
 		this.currentValue = currentValue;
 	}
 
+	@Override
+	public String toString() {
+		return "id: " + id + " Name: " + name + " Supply Max: $" + supplyMax + " Current Value: $" + currentValue;
+	}
+	
 }

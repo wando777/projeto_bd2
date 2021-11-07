@@ -39,4 +39,9 @@ public class Corretora {
 		this.address = address;
 	}
 
+	@Override
+	public String toString() {
+		return "id: " + id + " Name: " + name + " Site: " + site + " Address: " + address;
+	}
+
 }

@@ -2,7 +2,10 @@ package DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import connectPg.ConnectDataBase;
 import entities.Moeda;
@@ -24,7 +27,7 @@ public class MoedaDAO {
 			PreparedStatement preparator = con.prepareStatement(sql);
 			preparator.setInt(1, moeda.getId());
 			preparator.setString(2, moeda.getName());
-			preparator.setDouble(3, moeda.getSupplyMax());
+			preparator.setLong(3, moeda.getSupplyMax());
 			preparator.setDouble(4, moeda.getCurrentValue());
 
 			preparator.execute();
@@ -51,7 +54,7 @@ public class MoedaDAO {
 			else if (coloumn.toLowerCase().equals("supplymax")) {
 				sql = "UPDATE moeda SET supplyMax = ? WHERE id = ?";
 				preparator = con.prepareStatement(sql);
-				preparator.setDouble(1, moeda.getSupplyMax());
+				preparator.setLong(1, moeda.getSupplyMax());
 			}
 			preparator.setInt(2, moeda.getId());
 
@@ -77,6 +80,30 @@ public class MoedaDAO {
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
+	}
+
+	public List<Moeda> selectAll() {
+		String sql = "SELECT * FROM moeda";
+		List<Moeda> list = new ArrayList<Moeda>();
+
+		try {
+			PreparedStatement preparator = con.prepareStatement(sql);
+			ResultSet results = preparator.executeQuery();
+
+			while (results.next()) {
+				Moeda eachMoeda = new Moeda();
+				eachMoeda.setId(results.getInt("id"));
+				eachMoeda.setName(results.getString("name"));
+				eachMoeda.setCurrentValue(results.getDouble("currentValue"));
+				eachMoeda.setSupplyMax(results.getLong("supplyMax"));
+
+				list.add(eachMoeda);
+			}
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return list;
 	}
 
 }
