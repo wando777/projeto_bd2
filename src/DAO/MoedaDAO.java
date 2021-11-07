@@ -27,8 +27,55 @@ public class MoedaDAO {
 			preparator.setDouble(3, moeda.getSupplyMax());
 			preparator.setDouble(4, moeda.getCurrentValue());
 
+			preparator.execute();
+			preparator.close();
+			System.out.println(moeda.getName() + " was successfully added");
+
 		} catch (SQLException e) {
-			System.out.println("Error: " + e.getMessage());
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public void updateMoeda(Moeda moeda, String coloumn) {
+		String sql = null;
+
+		try {
+			PreparedStatement preparator = null;
+			// Atualizar currentValue
+			if (coloumn.toLowerCase().equals("currentvalue")) {
+				sql = "UPDATE moeda SET currentValue = ? WHERE id = ?";
+				preparator = con.prepareStatement(sql);
+				preparator.setDouble(1, moeda.getCurrentValue());
+			}
+			// Atualizar supplyMax
+			else if (coloumn.toLowerCase().equals("supplymax")) {
+				sql = "UPDATE moeda SET supplyMax = ? WHERE id = ?";
+				preparator = con.prepareStatement(sql);
+				preparator.setDouble(1, moeda.getSupplyMax());
+			}
+			preparator.setInt(2, moeda.getId());
+
+			preparator.execute();
+			preparator.close();
+
+			System.out.println("Update was successfully");
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public void deleteMoeda(Moeda moeda) {
+		String sql = "DELETE FROM moeda WHERE id = ?";
+		try {
+			PreparedStatement preparator = con.prepareStatement(sql);
+			preparator.setInt(1, moeda.getId());
+
+			preparator.execute();
+			preparator.close();
+			System.out.println(moeda.getName() + " was successfully deleted from data base");
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
 		}
 	}
 
