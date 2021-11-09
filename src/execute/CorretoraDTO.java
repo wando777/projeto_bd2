@@ -18,21 +18,14 @@ public class CorretoraDTO {
 		corretoraTest.setAddress(address);
 	}
 
-	public void addCorretora(Corretora corretoraTest) {
+	public void addCorretora() {
 
-		try {
-			corretoraDAO = new CorretoraDAO();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		criarCorretoraDao();
 
 		corretoraDAO.addCorretora(corretoraTest);
 	}
 
-	public void deleteCorretora(Corretora corretoraTest) {
-
+	private void criarCorretoraDao() {
 		try {
 			corretoraDAO = new CorretoraDAO();
 		} catch (SQLException e) {
@@ -40,24 +33,30 @@ public class CorretoraDTO {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void deleteCorretora() {
+
+		criarCorretoraDao();
 
 		corretoraDAO.deleteCorretora(corretoraTest);
 	}
 
-	public void listaCorretoras(Corretora corretoraTest) {
+	public void listaCorretoras() {
 
-		try {
-			corretoraDAO = new CorretoraDAO();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		criarCorretoraDao();
 
 		List<Corretora> list = corretoraDAO.selectAll();
 		for (Corretora corretora : list) {
 			System.out.println(corretora);
 		}
+	}
+	
+	public void updateCorretora(String coloumn) {
+		
+		criarCorretoraDao();
+		corretoraDAO.updateCorretora(corretoraTest, coloumn);
+		
 	}
 
 }

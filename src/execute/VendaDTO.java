@@ -17,46 +17,45 @@ public class VendaDTO {
 		vendaTest.setIdMoeda(idMoeda);
 	}
 
-	public void addVenda(Venda vendaTest) {
+	public void addVenda() {
 
-		try {
-			vendaDAO = new VendaDAO();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		createVendaDAO();
 
 		vendaDAO.addVenda(vendaTest);
 	}
 
-	public void deleteVenda(Venda vendaTest) {
+	public void deleteVenda() {
 
-		try {
-			vendaDAO = new VendaDAO();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		createVendaDAO();
 
 		vendaDAO.deleteVenda(vendaTest);
 	}
 
-	public void listaVendas(Venda vendaTest) {
+	public void listaVendas() {
 
-		try {
-			vendaDAO = new VendaDAO();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		createVendaDAO();
 
 		List<Venda> list = vendaDAO.selectAll();
 		for (Venda venda : list) {
 			System.out.println(venda);
 		}
+	}
+
+	private void createVendaDAO() {
+		try {
+			vendaDAO = new VendaDAO();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void updateVenda(String colum) {
+		
+		createVendaDAO();
+		vendaDAO.updateVenda(vendaTest, colum);
+		
 	}
 
 }

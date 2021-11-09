@@ -4,8 +4,16 @@ public class Moeda {
 
 	private int id;
 	private String name;
-	private Long supplyMax;
 	private double currentValue;
+	private Long quantidade;
+
+	public Long getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(Long quantidade) {
+		this.quantidade = quantidade;
+	}
 
 	public int getId() {
 		return id;
@@ -23,14 +31,6 @@ public class Moeda {
 		this.name = name;
 	}
 
-	public long getSupplyMax() {
-		return supplyMax;
-	}
-
-	public void setSupplyMax(long i) {
-		this.supplyMax = i;
-	}
-
 	public double getCurrentValue() {
 		return currentValue;
 	}
@@ -41,7 +41,7 @@ public class Moeda {
 
 	@Override
 	public String toString() {
-		return "id: " + id + " Name: " + name + " Supply Max: $" + supplyMax + " Current Value: $" + currentValue;
+		return "id: " + id + " Name: " + name + " Current Value: $" + currentValue;
 	}
 	
 }

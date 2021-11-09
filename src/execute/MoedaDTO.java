@@ -11,28 +11,21 @@ public class MoedaDTO {
 	Moeda moedaTest = new Moeda();
 	MoedaDAO moedaDAO = null;
 
-	public MoedaDTO(int id, String name, long supplyMax, double currentValue) {
+	public MoedaDTO(int id, String name, Long quantidade, double currentValue) {
 		moedaTest.setId(id);
 		moedaTest.setName(name);
-		moedaTest.setSupplyMax(supplyMax);
+		moedaTest.setQuantidade(quantidade);
 		moedaTest.setCurrentValue(currentValue);
 	}
 
 	public void addMoeda() {
 
-		try {
-			moedaDAO = new MoedaDAO();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		createMoedaDAO();
 
 		moedaDAO.addMoeda(moedaTest);
 	}
 
-	public void deleteMoeda() {
-
+	private void createMoedaDAO() {
 		try {
 			moedaDAO = new MoedaDAO();
 		} catch (SQLException e) {
@@ -40,24 +33,29 @@ public class MoedaDTO {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void deleteMoeda() {
+
+		createMoedaDAO();
 
 		moedaDAO.deleteMoeda(moedaTest);
 	}
 
 	public void listaMoedas() {
 
-		try {
-			moedaDAO = new MoedaDAO();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		createMoedaDAO();
 
 		List<Moeda> list = moedaDAO.selectAll();
 		for (Moeda moeda : list) {
 			System.out.println(moeda);
 		}
+	}
+	
+	public void updateMoeda(String colum) {
+		
+		createMoedaDAO();
+		moedaDAO.updateMoeda(moedaTest, colum);
 	}
 
 }

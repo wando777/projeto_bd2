@@ -21,7 +21,7 @@ public class VendaDAO {
 	}
 
 	public void addVenda(Venda venda) {
-		String sql = "INSERT INTO venda(id, name, site, address) VALUES(?,?,?,?)";
+		String sql = "INSERT INTO venda(id, idCorretora, idMoeda) VALUES(?,?,?)";
 
 		try {
 			PreparedStatement preparator = con.prepareStatement(sql);
@@ -59,13 +59,13 @@ public class VendaDAO {
 		try {
 			PreparedStatement preparator = null;
 			// Update site
-			if (coloumn.toLowerCase().equals("idCorretora")) {
+			if (coloumn.toLowerCase().equals("idcorretora")) {
 				sql = "UPDATE venda SET idCorretora = ? WHERE id = ?";
 				preparator = con.prepareStatement(sql);
 				preparator.setInt(1, venda.getIdCorretora());
 			}
 			// Update address
-			else if (coloumn.toLowerCase().equals("idMoeda")) {
+			else if (coloumn.toLowerCase().equals("idmoeda")) {
 				sql = "UPDATE venda SET idMoeda = ? WHERE id = ?";
 				preparator = con.prepareStatement(sql);
 				preparator.setInt(1, venda.getIdMoeda());

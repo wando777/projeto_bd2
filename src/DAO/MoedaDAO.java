@@ -21,14 +21,14 @@ public class MoedaDAO {
 	}
 
 	public void addMoeda(Moeda moeda) {
-		String sql = "INSERT INTO moeda(id, name, supplyMax, currentValue) VALUES(?,?,?,?)";
+		String sql = "INSERT INTO moeda(id, name, currentValue, quantidade) VALUES(?,?,?,?)";
 
 		try {
 			PreparedStatement preparator = con.prepareStatement(sql);
 			preparator.setInt(1, moeda.getId());
 			preparator.setString(2, moeda.getName());
-			preparator.setLong(3, moeda.getSupplyMax());
-			preparator.setDouble(4, moeda.getCurrentValue());
+			preparator.setDouble(3, moeda.getCurrentValue());
+			preparator.setLong(4, moeda.getQuantidade());
 
 			preparator.execute();
 			preparator.close();
@@ -50,11 +50,11 @@ public class MoedaDAO {
 				preparator = con.prepareStatement(sql);
 				preparator.setDouble(1, moeda.getCurrentValue());
 			}
-			// Atualizar supplyMax
-			else if (coloumn.toLowerCase().equals("supplymax")) {
-				sql = "UPDATE moeda SET supplyMax = ? WHERE id = ?";
+//			 Atualizar quantidade
+			else if (coloumn.toLowerCase().equals("quantidade")) {
+				sql = "UPDATE moeda SET quantidade = ? WHERE id = ?";
 				preparator = con.prepareStatement(sql);
-				preparator.setLong(1, moeda.getSupplyMax());
+				preparator.setLong(1, moeda.getQuantidade());
 			}
 			preparator.setInt(2, moeda.getId());
 
@@ -95,7 +95,6 @@ public class MoedaDAO {
 				eachMoeda.setId(results.getInt("id"));
 				eachMoeda.setName(results.getString("name"));
 				eachMoeda.setCurrentValue(results.getDouble("currentValue"));
-				eachMoeda.setSupplyMax(results.getLong("supplyMax"));
 
 				list.add(eachMoeda);
 			}
